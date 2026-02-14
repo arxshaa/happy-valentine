@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 💖</title>
+    <link rel="stylesheet" href="vlntn.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="envelope-wrapper" onclick="toggleEnvelope()">
+            <div class="envelope">
+                <div class="letter">
+                    <div id="page1">
+                        <p><strong>Happy Valentine's Day ❤️</strong><br><br>
+                        It feels like I've lost something. I don't blame you for this, I respect your decision. I just want to give you this as a token of my love for you. I bought and made this before you told me you wanted to be alone. Honestly, it made me sad. When you told me, I went straight to the office bathroom to calm myself down, trying to accept what was happening. I may have said it was okay, but honestly, I cried. This may sound exaggerated, but that's how it was. Once again, I don't blame you for the decision you made. I support you 100% in what you're doing now and in the future. I will always pray that you can achieve what you want. I will also try to achieve what I want. One last thing, I will always love you.</p>
+                        <div class="next-btn" onclick="event.stopPropagation(); showPage(2)">➡️</div>
+                    </div>
+                    <div id="page2" style="display: none;">
+                        <p><strong>The reason behind the gift</strong><br><br>
+                        Why bricks?<br>
+                        It's because I would really love to be asked to arrange them one by one, piece by piece. And once they form a perfect shape, I won't let anyone destroy it.<br>
+                        <br>
+                        Why Lotso?<br>  
+                        Because you once said Lotso was cute, and every time I see Lotso, I always think of you.<br>  
+                        <br>
+                        Why six stems of flowers?<br>  
+                        Because it's been six years since I've had these feelings for you. Feelings of affection that I don't even know why they've lasted this long.<br>  
+                        <br>
+                        I hope you like it and understand what it means.<br></p>
+                        <div class="next-btn" style="text-align: left;" onclick="event.stopPropagation(); showPage(1)">⬅️</div>
+                    </div>
+                </div>
+                <div class="heart-seal"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleEnvelope() {
+            const envelope = document.querySelector('.envelope-wrapper');
+            if (envelope.classList.contains('open')) {
+                envelope.classList.remove('open');
+                envelope.classList.add('close');
+            } else {
+                envelope.classList.remove('close');
+                envelope.classList.add('open');
+            }
+        }
+
+        function showPage(pageNumber) {
+            if (pageNumber === 2) {
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'block';
+            } else {
+                document.getElementById('page2').style.display = 'none';
+                document.getElementById('page1').style.display = 'block';
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff4e8d, #ff1f5a);
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    color: white;
+    animation: fadeIn 1.5s ease;
+    margin: 0 auto;
+}
+
+.card h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.card button {
+    background: white;
+    color: #ff1f5a;
+    font-weight: bold;
+}
+
+.card button:hover {
+    transform: scale(1.1);
+}
+
+.surprise {
+    display: none;
+    margin-top: 30px;
+    color: white;
+    animation: fadeIn 1s ease;
+}
+
+.surprise h2 {
+    margin-bottom: 15px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.yes {
+    background: white;
+    color: #ff1f5a;
+    margin-right: 10px;
+}
+
+.no {
+    background: #ff1f5a;
+    color: white;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 40px;
+    z-index: -1;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh);
+    }
+}
+
+@keyframes readLetter {
+    0% {
+        transform: translateY(0);
+        z-index: 1;
+    }
+    60% {
+        transform: translateY(-200px);
+        z-index: 1;
+    }
+    61% {
+        transform: translateY(-200px);
+        z-index: 4;
+    }
+    100% {
+        transform: translateY(-40px);
+        z-index: 4;
+    }
+}
+
+@keyframes closeLetter {
+    0% {
+        transform: translateY(-40px);
+        z-index: 4;
+    }
+    40% {
+        transform: translateY(-200px);
+        z-index: 4;
+    }
+    41% {
+        transform: translateY(-200px);
+        z-index: 1;
+    }
+    100% {
+        transform: translateY(0);
+        z-index: 1;
+    }
+}
+
+/* Envelope Styles */
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+    margin: 50px auto 0;
+    transition: transform 0.3s ease;
+    perspective: 1000px;
+}
+
+.envelope-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background: #ff1f5a;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.envelope::before { /* Flap (Penutup Atas) */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #ff4e8d;
+    transform-origin: top;
+    transition: transform 0.5s ease 0.8s, z-index 0.1s linear 0.8s;
+    z-index: 3;
+}
+
+.envelope::after { /* Pocket (Kantong Bawah) */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid #ff3366;
+    border-right: 150px solid #ff3366;
+    border-bottom: 100px solid #d61a4a;
+    border-top: 100px solid transparent;
+    border-radius: 0 0 10px 10px;
+    z-index: 2;
+}
+
+.letter {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 270px;
+    height: auto;
+    max-height: 180px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.5s ease;
+    z-index: 1;
+    color: #ff1f5a;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Hide Scrollbar for Chrome, Safari and Opera */
+.letter::-webkit-scrollbar {
+    display: none;
+}
+
+/* Open Animation */
+.envelope-wrapper.open .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+    transition: transform 0.5s ease, z-index 0.1s linear 0.2s;
+}
+
+.envelope-wrapper.open .letter {
+    animation: readLetter 1s forwards 0.5s;
+}
+
+.envelope-wrapper.close .letter {
+    animation: closeLetter 1s forwards;
+}
+
+.heart-seal {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: #d61a4a;
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: 5;
+    transition: 0.3s ease 1s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.heart-seal::before,
+.heart-seal::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #d61a4a;
+    border-radius: 50%;
+}
+
+.heart-seal::before {
+    top: -15px;
+    left: 0;
+}
+
+.heart-seal::after {
+    left: -15px;
+    top: 0;
+}
+
+.envelope-wrapper.open .heart-seal {
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.next-btn {
+    margin-top: 10px;
+    text-align: right;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Responsive Design untuk Mobile */
+@media (max-width: 500px) {
+    .card {
+        width: 80%;
+        padding: 25px;
+    }
+
+    .envelope-wrapper {
+        transform: scale(0.8);
+    }
+
+    .envelope-wrapper:hover {
+        transform: scale(0.8); /* Matikan efek zoom di HP agar tidak overflow */
+    }
+}
